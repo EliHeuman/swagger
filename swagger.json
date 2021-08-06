@@ -1,0 +1,125 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0", 
+        "title": "My Restaurant Project CRUD",
+        "description": "My User Project Application API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:4000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Restaurants",
+            "description": "API for users in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+
+    "paths": {
+        "/restaurants": {
+            "get": {
+                "tags": ["Restaurants"],
+                "summary": "Get all Restaurants in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    }
+                }
+            }
+        },
+        "/restaurant": {
+            "post": {
+                "tags": ["Restaurants"],
+                "description": "Create new restaurant in system",
+                "parameters": [
+                    {
+                        "name": "restaurant",
+                        "in": "body",
+                        "description": "Restaurant that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New restaurant is created",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    }
+                }
+            }
+        },
+        "/restaurant/{id}": {
+            "delete": {
+                "tags": ["Restaurants"],
+                "description": "Delete a restaurant in system",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of restaurant that we want to delete",
+                        "type":"integer",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "A restaurant was deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Restaurant"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                      },
+                      "404": {
+                        "description": "Restaurant not found"
+                      }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Restaurant": {
+            "required": ["id","name"],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
+
+
+
+
